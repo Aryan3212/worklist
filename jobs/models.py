@@ -11,4 +11,7 @@ class Job(models.Model):
     application_url = models.URLField()
     date_added = models.DateTimeField("Date Published")
 
+    def __str__(self) -> str:
+        return self.title + " " + self.company_name
+
 
