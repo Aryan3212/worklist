@@ -62,6 +62,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://localhost:3000",
     "http://127.0.0.1:3000",
     "https://127.0.0.1:3000",
+    '.worklist.club'
 ]
 
 ROOT_URLCONF = 'worklist.urls'
@@ -155,3 +156,11 @@ STATIC_ROOT = '/var/www/worklist_static/static'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+SECURE_HSTS_SECONDS = 2592000  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
