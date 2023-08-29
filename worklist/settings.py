@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': 'worklist',
         'USER': os.environ.get('DB_USER'),
         'HOST': os.environ.get('DB_HOST'),
-        'PASSWORD': os.environ.get('DB_HOST'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
         'PORT': os.environ.get('DB_PORT')
     }
 }
