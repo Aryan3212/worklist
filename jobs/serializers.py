@@ -18,4 +18,4 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class JobSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Job
-        fields = ['title', 'description', 'application_url', 'date_added', 'company_name', 'minimum_experience', 'location']
+        fields = ['id', 'title', 'description', 'application_url', 'application_email', 'date_added', 'company_name', 'minimum_experience', 'location']
