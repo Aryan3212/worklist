@@ -31,7 +31,7 @@ class Job(models.Model):
     minimum_experience = models.IntegerField(default=0)
     application_url = models.URLField(blank=True)
     application_email = models.EmailField(blank=True)
-    date_added = models.DateTimeField("Date Published", default='now')
+    date_added = models.DateTimeField("Date Published", auto_now_add=True, blank=True)
 
     def __str__(self) -> str:
         return self.title + " " + self.company_name
