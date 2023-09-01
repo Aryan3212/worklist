@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 
@@ -12,7 +13,7 @@ class Job(models.Model):
             code='invalid_characters'
         )
     ])
-    description = models.TextField()
+    description = RichTextField()
     location = models.CharField(max_length=200,  validators=[
         RegexValidator(
             regex=alphanumericpunctuation_regex,
