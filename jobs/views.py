@@ -2,8 +2,8 @@ from django.contrib.auth.models import User, Group
 from .models import Job
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework import filters
 from .serializers import UserSerializer, GroupSerializer, JobSerializer
-
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -27,7 +27,9 @@ class JobViewSet(viewsets.ModelViewSet):
     API endpoint that allows jobs to be viewed or edited.
     """
     serializer_class = JobSerializer
-
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = '__all__'
+    ordering = ['-date_added']
     def get_queryset(self):
         """
         This view should return a list of all the purchases for
