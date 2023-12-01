@@ -1,21 +1,25 @@
-from django.contrib.auth.models import User, Group
-from .models import Job
+from .models import Job, Application, Employer
 from rest_framework import serializers
+from users.serializers import UserSerializer
 
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'groups']
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']
-
-
-class JobSerializer(serializers.HyperlinkedModelSerializer):
+class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
-        fields = ['id', 'title', 'description', 'application_url', 'application_email', 'date_added', 'company_name', 'minimum_experience', 'location']
+        fields = '__all__'
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    applicant = UserSerializer(read_only=True, many=False)
+    class Meta:
+        model = Application
+        fields = ['id', 'created_at', 'updated_at', 'applicant', 'resume_link',]
+
+class JobApplicationSerializer(serializers.ModelSerializer):
+    owner = UserSerializer(source="job.employer.owner", read_only=True, many=False)
+    class Meta:
+        model = Application
+        fields = ['id', 'created_at', 'updated_at', 'applicant', 'resume_link', 'applicant', 'owner']
+
+class EmployerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Employer
+        fields = '__all__'
