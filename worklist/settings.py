@@ -100,7 +100,7 @@ WSGI_APPLICATION = 'worklist.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'worklist_legacy',
+        'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
         'HOST': os.environ.get('DB_HOST'),
         'PASSWORD': os.environ.get('DB_PASSWORD'),
