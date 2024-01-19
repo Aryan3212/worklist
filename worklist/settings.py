@@ -32,7 +32,7 @@ DEBUG = os.environ.get('DEBUG')
 ALLOWED_HOSTS = ['api.worklist.club']
 
 if DEBUG:
-    ALLOWED_HOSTS = ['127.0.0.1']
+    ALLOWED_HOSTS += ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -63,10 +63,10 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'https://www.worklist.club',
-    'https://worklist.club'
+    'https://worklist.club',
 ]
 if DEBUG:
-    [
+    CORS_ALLOWED_ORIGINS += [
     "http://localhost:3000",
     "https://localhost:3000",
     "http://127.0.0.1:3000",
