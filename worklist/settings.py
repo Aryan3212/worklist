@@ -27,9 +27,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['54.164.18.233', 'api.worklist.club']
+ALLOWED_HOSTS = ['api.worklist.club']
+
+if DEBUG:
+    ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -59,13 +62,16 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "https://localhost:3000",
-    "http://127.0.0.1:3000",
-    "https://127.0.0.1:3000",
     'https://www.worklist.club',
     'https://worklist.club'
 ]
+if DEBUG:
+    [
+    "http://localhost:3000",
+    "https://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://127.0.0.1:3000"
+    ]
 
 ROOT_URLCONF = 'worklist.urls'
 
@@ -94,7 +100,7 @@ WSGI_APPLICATION = 'worklist.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'worklist',
+        'NAME': 'worklist_legacy',
         'USER': os.environ.get('DB_USER'),
         'HOST': os.environ.get('DB_HOST'),
         'PASSWORD': os.environ.get('DB_PASSWORD'),
@@ -160,7 +166,7 @@ STATIC_ROOT = '/var/www/worklist_static/static'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-SECURE_HSTS_SECONDS = 2592000  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
+SECURE_HSTS_SECONDS = 1  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
